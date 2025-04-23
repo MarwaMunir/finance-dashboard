@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Personal Finance Dashboard</title>
+    <style>
+        body {
+            background-color: #001F3F;
+            color: #FFFFFF;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+			background-image: url('flip.jpg'); /* Add your background image here */
+            background-size: cover; /* Ensure the image covers the entire background */
+            background-position: top center; /* Center the background image */
+            background-attachment: fixed;
+        }
+        .wrapper {
+            width: 80%; /* Adjusted width */
+            max-width: 800px; /* Max width for the box */
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #001F3F;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Added box shadow */
+        }
+        h1, h2 {
+            color: #39CCCC;
+            font-size: 24px; /* Increased font size */
+            margin-bottom: 20px; /* Added margin */
+        }
+        .container {
+            padding: 30px; /* Increased padding */
+			background-image: url('flip.jpg'); /* Add your background image here */
+            background-size: cover; /* Ensure the image covers the entire background */
+            background-position: center; /* Center the background image */
+            background-attachment: fixed;  
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Added box shadow */
+			
+        }
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+        table tr td {
+            text-align: left;
+            padding: 10px;
+        }
+        table tr td:first-child {
+            width: 30%;
+            color: #39CCCC;
+        }
+        input[type="text"],
+        input[type="tel"],
+        input[type="number"],
+        select {
+            width: 70%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: #87CEEB;
+            color: #000000;
+        }
+        input[type="submit"] {
+            width: auto;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            background-color: #39CCCC;
+            color: #001F3F;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .return-link {
+            color: #39CCCC;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            background-color: #39CCCC;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Added box shadow */
+        }
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="avatar">
+                <img src="avatar.png" alt="Avatar">
+            </div>
+            <h1>Welcome to Your Personal Finance Journey</h1>
+            <form action="dashboard.asp" method="post" onsubmit="return validateForm()">
+                <table>
+                    <tr>
+                        <td><label for="name">Enter Your Name:</label></td>
+                        <td><input type="text" id="name" name="name" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="telephone">Enter Your Telephone Number:</label></td>
+                        <td><input type="tel" id="telephone" name="telephone" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" 
+                        title="Please enter a valid phone number in the format xxx-xxx-xxxx"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="income">Monthly Income ($):</label></td>
+                        <td><input type="number" id="income" name="income" required min="0"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="expenses">Monthly Expenses ($):</label></td>
+                        <td><input type="number" id="expenses" name="expenses" required min="0"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="savings">Monthly Savings ($):</label></td>
+                        <td><input type="number" id="savings" name="savings" required min="0"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="debt">Total Debt ($):</label></td>
+                        <td><input type="number" id="debt" name="debt" required min="0"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="initialInvestment">Initial Investment ($):</label></td>
+                        <td><input type="number" id="initialInvestment" name="initialInvestment" required min="0"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="finalInvestment">Final Investment ($):</label></td>
+                        <td><input type="number" id="finalInvestment" name="finalInvestment" required min="0"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="goal">Financial Goal:</label></td>
+                        <td>
+                            <select id="goal" name="goal">
+                                <option value="retirement">Retirement</option>
+                                <option value="home">Buying a Home</option>
+                                <option value="education">Education</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="strategy">Investment Strategy:</label></td>
+                        <td>
+                            <input type="radio" id="conservative" name="strategy" value="conservative" required>
+                            <label for="conservative">Conservative</label><br>
+                            <input type="radio" id="moderate" name="strategy" value="moderate">
+                            <label for="moderate">Moderate</label><br>
+                            <input type="radio" id="aggressive" name="strategy" value="aggressive">
+                            <label for="aggressive">Aggressive</label><br>
+                        </td>
+                    </tr>
+                </table>
+                <input type="submit" value="Start Journey">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            if (
+                document.getElementById("income").value < 0 ||
+                document.getElementById("expenses").value < 0 ||
+                document.getElementById("savings").value < 0 ||
+                document.getElementById("debt").value < 0 ||
+                document.getElementById("initialInvestment").value < 0 ||
+                document.getElementById("finalInvestment").value < 0
+            ) {
+                alert("Please enter non-negative values for financial metrics.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
